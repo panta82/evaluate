@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<script src="evaluate.js"></script>
+		<script>
+			test('123');
+			test('1+2');
+			test('1+2*3/4-5+6*7-8*9+10-11-12-13+14-15*16');
+			test('5 + 4*3 / (5 -2)');
+			test('(2-3/1)* (51-12*(4-2*(1-4)))');
+			test('(2-3/1)* (51-12*(4-2*(1-4))) / (2-3/1)* (51-12*(4-2*(1-4))) * 3324234.23');
+
+			function test(expr) {
+				let expected;
+				try {
+					expected = eval(expr);
+				}
+				catch (err) {
+					console.log(err);
+				}
+				const actual = evaluate(expr);
+				const sign = actual === expected
+					? '✔'
+					: '🗙';
+				
+				let message = `${sign}   ${expr}  =>  ${actual}`;
+				if (actual !== expected) {
+					message += ` (expected: ${expected})`;
+				}
+				
+				console.log(message);
+			}
+		</script>
+	</body>
+</html>
